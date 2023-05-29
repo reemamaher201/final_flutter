@@ -12,7 +12,7 @@ class BookHelper {
     String dbPath = "$dirPath/Library.db";
     database = await openDatabase(dbPath, version: 1, onCreate: (db, v) {
       db.execute(
-          'CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, author Text ,image Text, description Text , date Text)');
+          'CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, author Text ,image Text, description Text , date Text ,isFavorite int)');
     });
   }
 
@@ -24,7 +24,6 @@ class BookHelper {
       return 0;
     }
   }
-
   Future<List<Book>> getAllBooks() async {
     List<Map<String, dynamic>> results = await database.query('books');
 
@@ -41,7 +40,7 @@ class BookHelper {
   updateBook(Book newBook) async {
     log(newBook.toMap().toString());
     log(newBook.id.toString());
-    database.update("books", newBook.toMap(),
+    database.update("students", newBook.toMap(),
         where: "id=?", whereArgs: [newBook.id]);
   }
 }

@@ -29,26 +29,18 @@ class BookItem extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text("ماذا تريد أن تفعل ",textAlign: TextAlign.right,),
-              content: const Text("هل ترغب في حذف الكتاب أم تعديله؟",textAlign: TextAlign.right,),
+              content: const Text("هل ترغب في حذف الكتاب ",textAlign: TextAlign.right,),
               actions: [
                 TextButton(
                   child: const Text("حذف"),
                   onPressed: () async {
-                    await Provider.of<BookProvider>(context, listen: false)
+                    await  Provider.of<BookProvider>(context, listen: false)
                         .deleteBookFromDb(book.id!);
                     Navigator.of(context).pop(); // إغلاق مربع الحوار
                   },
                 ),
 
-                TextButton(
-                  child: const Text("تعديل"),
-                  onPressed: () {
-                    // اتخذ إجراء التعديل هنا
-                    Provider.of<BookProvider>(context, listen: false)
-                        .navigateToEditScreen(book, context);
 
-                  },
-                ),
               ],
             );
           },
@@ -59,8 +51,18 @@ class BookItem extends StatelessWidget {
           children: [
             _buildImage(),
             Positioned(
-              bottom: 8,
+              top: 2,
               right: 8,
+              child: IconButton(icon: const Icon(Icons.edit,color: Colors.purpleAccent,
+              ), onPressed: () {
+                Provider.of<BookProvider>(context, listen: false)
+                    .navigateToEditScreen(book, context);
+              },
+              ),
+            ),
+            Positioned(
+              bottom: 8,
+              left: 8,
               child: Container(
                 padding: const EdgeInsets.all(8),
                 child: Text(
@@ -71,7 +73,19 @@ class BookItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
               ),
+            ),
+            Positioned(
+              bottom: 2,
+              right: 8,
+              child: IconButton(icon: Icon(
+                book.isFavorite! ? Icons.favorite : Icons.favorite_border,
+                color: book.isFavorite! ? Colors.red : null,
+              ), onPressed: () {
+                Provider.of<BookProvider>(context, listen: false).toggleFavorite(book);
+              },
+                  ),
             ),
           ],
         ),

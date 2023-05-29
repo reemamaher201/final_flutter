@@ -5,6 +5,7 @@ class Book {
   String? image;
   String? description;
   String? date;
+  bool? isFavorite;
 
   Book({
     this.id,
@@ -12,7 +13,8 @@ class Book {
     this.author,
     this.image,
     this.description,
-    this.date
+    this.date,
+    this.isFavorite = false
 
   });
 
@@ -24,6 +26,7 @@ class Book {
     image = map['image']; // تعيين قيمة الصورة من الخريطة
     description = map['description'];
     date = map['date'];
+    isFavorite = map['isFavorite'] ==1 ;
   }
 
   Map<String, dynamic> toMap() {
@@ -32,7 +35,8 @@ class Book {
       "author": author,
       "image": image, // إضافة الصورة إلى الخريطة
       "description": description,
-      "date": date
+      "date": date,
+      "isFavorite": isFavorite
     };
   }
 }

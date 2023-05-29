@@ -21,6 +21,9 @@ class BookProvider extends ChangeNotifier {
   TextEditingController  descController = TextEditingController();
   TextEditingController  dateController = TextEditingController();
 
+  List<Book> get favoriteBooks => allBooks!.where((book) => book.isFavorite!).toList();
+
+
   getAllBooksFromDb() async {
     allBooks = await BookHelper.bookHelper.getAllBooks();
     notifyListeners();
@@ -80,5 +83,10 @@ class BookProvider extends ChangeNotifier {
     );
     await BookHelper.bookHelper.updateBook(book);
     getAllBooksFromDb();
+  }
+  void toggleFavorite(Book book) {
+    final updatedBook = allBooks!.firstWhere((b) => b.id == book.id);
+    updatedBook.isFavorite = !updatedBook.isFavorite!;
+    notifyListeners();
   }
 }

@@ -7,6 +7,7 @@ import 'models/book_helper.dart';
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await BookHelper.bookHelper.initDb();
   runApp(ChangeNotifierProvider<BookProvider>(
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
       primarySwatch: const MaterialColor(
       0xFF845DC5,
