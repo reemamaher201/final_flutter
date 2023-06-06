@@ -84,6 +84,7 @@ class BookProvider extends ChangeNotifier {
     await BookHelper.bookHelper.updateBook(book);
     getAllBooksFromDb();
   }
+
   void toggleFavorite(Book book) {
     final updatedBook = allBooks!.firstWhere((b) => b.id == book.id);
     updatedBook.isFavorite = !updatedBook.isFavorite!;

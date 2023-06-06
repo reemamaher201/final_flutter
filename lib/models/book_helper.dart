@@ -40,7 +40,7 @@ class BookHelper {
   updateBook(Book newBook) async {
     log(newBook.toMap().toString());
     log(newBook.id.toString());
-    database.update("students", newBook.toMap(),
+    database.update("books", newBook.toMap(),
         where: "id=?", whereArgs: [newBook.id]);
   }
 }
